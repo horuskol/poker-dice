@@ -38,6 +38,7 @@ export default {
                                 clearInterval(this.timer);
                                 this.timer = null;
                                 this.$emit('stopped', this.side);
+                                return;
                             }
 
                             this.side = Math.floor(Math.random() * 6) + 1;

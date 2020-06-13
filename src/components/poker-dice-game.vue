@@ -1,80 +1,68 @@
 <template>
     <div>
-        <div style="display: flex; justify-content: space-around; margin-top: 5em;" @click="rollDice">
+        <div class="flex flex-row justify-around m-5 p-5 bg-green-500 border-yellow-700 border-8 rounded-lg" @click="rollDice">
             <die v-for="d in 5" :key="d" :state="state" @stopped="stopped"></die>
         </div>
 
-        <table style="margin: 5em auto">
+        <table class="m-5 border">
             <tr>
-                <th>Dice</th>
-                <th>&nbsp;</th>
-                <th>Score</th>
+                <th class="text-left p-2 border-b-4">Dice</th>
+                <th v-for="(roll, index) in rolls" class="text-left p-2 border-b-4 border-l-2">Game {{ index + 1}}</th>
             </tr>
 
             <tr>
-                <td>Aces</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ roll['1'] * 1 }}</td>
+                <td class="h-16 p-2 border-b">Aces</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['1'] * 1 }}</td>
             </tr>
 
             <tr>
-                <td>Twos</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ roll['2'] * 2 }}</td>
+                <td class="h-16 p-2 border-b">Twos</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['2'] * 2 }}</td>
             </tr>
 
             <tr>
-                <td>Threes</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ roll['3'] * 3 }}</td>
+                <td class="h-16 p-2 border-b">Threes</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['3'] * 3 }}</td>
             </tr>
 
             <tr>
-                <td>Fours</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ roll['4'] * 4 }}</td>
+                <td class="h-16 p-2 border-b">Fours</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['4'] * 4 }}</td>
             </tr>
 
             <tr>
-                <td>Fives</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ roll['5'] * 5 }}</td>
+                <td class="h-16 p-2 border-b">Fives</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['5'] * 5 }}</td>
             </tr>
 
             <tr>
-                <td>Sixes</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ roll['6'] * 6 }}</td>
+                <td class="h-16 p-2 border-b">Sixes</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['6'] * 6 }}</td>
             </tr>
 
             <tr>
-                <td>3 of a kind</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ threeKind(roll) }}</td>
+                <td class="h-16 p-2 border-b">3 of a kind</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ threeKind(roll) }}</td>
             </tr>
 
             <tr>
-                <td>4 of a kind</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ fourKind(roll) }}</td>
+                <td class="h-16 p-2 border-b">4 of a kind</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fourKind(roll) }}</td>
             </tr>
 
             <tr>
-                <td>Full House</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ fullHouse(roll) }}</td>
+                <td class="h-16 p-2 border-b">Full House</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fullHouse(roll) }}</td>
             </tr>
 
             <tr>
-                <td>5 of a kind</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ fiveKind(roll) }}</td>
+                <td class="h-16 p-2 border-b">5 of a kind</td>
+                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fiveKind(roll) }}</td>
             </tr>
 
             <tr>
-                <td>Total</td>
-                <td>&nbsp;</td>
-                <td v-for="roll in rolls">{{ totalScore(roll) }}</td>
+                <td class="font-bold p-2 border-t-2 bg-gray-200">Total</td>
+                <td v-for="roll in rolls" class="font-fancy font-bold text-xl text-center pt-2 border-l-2 border-t-2 bg-gray-200">{{ totalScore(roll) }}</td>
             </tr>
         </table>
     </div>
@@ -95,8 +83,7 @@ export default {
         return {
             state: WAITING,
             scores: [],
-            rolls: [],
-            currentRolls: 0
+            rolls: []
         }
     },
 
@@ -114,18 +101,20 @@ export default {
             if (this.scores.length === 5) {
                 this.state = WAITING;
 
-                this.rolls = [{
+                let game = {
                     '1': 0,
                     '2': 0,
                     '3': 0,
                     '4': 0,
                     '5': 0,
                     '6': 0
-                }];
+                };
 
                 for (let i = 0; i < 5; i++) {
-                    this.rolls[0][this.scores[i]]++;
+                    game[this.scores[i]]++;
                 }
+
+                this.rolls.push(game);
             }
         },
 

@@ -1,3 +1,5 @@
+import './app.css';
+
 import Vue from 'vue';
 
 import PokerDiceGame from './components/poker-dice-game';

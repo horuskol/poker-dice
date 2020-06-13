@@ -16,7 +16,7 @@ export default {
             styleObject: {
                 height: this.size + 'px',
                 width: this.size + 'px',
-                backgroundImage: 'url("/images/dice-' + this.size + '.png")',
+                backgroundImage: 'url("images/dice-' + this.size + '.png")',
                 backgroundPosition: '0 0',
                 transition: 'background-position 100ms ease'
             },

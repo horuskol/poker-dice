@@ -1,8 +1,12 @@
 <template>
     <div>
-        <div class="flex flex-row justify-around m-5 p-5 bg-green-500 border-yellow-700 border-8 rounded-lg" @click="rollDice">
-            <die v-for="d in 5" :key="d" :state="state" @stopped="stopped"></die>
+        <div class="inline-block justify-around m-5 sm:p-5 bg-green-500 border-yellow-700 border-8 rounded-lg" @click="rollDice">
+            <die v-for="d in 5" :key="d" :state="state" :size="dieSize" @stopped="stopped"></die>
         </div>
+
+        <p class="ml-5 mr-5">
+            Click or tap on the dice to roll.
+        </p>
 
         <table class="m-5 border">
             <tr>
@@ -83,7 +87,8 @@ export default {
         return {
             state: WAITING,
             scores: [],
-            rolls: []
+            rolls: [],
+            dieSize: screen.width > 600 ? 100 : 50
         }
     },
 

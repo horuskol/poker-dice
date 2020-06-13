@@ -1,5 +1,5 @@
 <template>
-    <div :style="styleObject"></div>
+    <div :style="styleObject" class="inline-block m-1 sm:m-2"></div>
 </template>
 
 <script>
@@ -8,20 +8,25 @@ import {WAITING, ROLLING} from './poker-dice-game';
 export default {
     props: {
         state: String,
+        size: Number,
     },
 
     data() {
         return {
             styleObject: {
-                height: '100px',
-                width: '100px',
-                backgroundImage: 'url("/images/dice-100.png")',
+                height: this.size + 'px',
+                width: this.size + 'px',
+                backgroundImage: 'url("/images/dice-' + this.size + '.png")',
                 backgroundPosition: '0 0'
             },
             side: 1,
             timer: null,
             rolls: 0
         }
+    },
+
+    mounted() {
+        this.side = Math.floor(Math.random() * 6) + 1;
     },
 
     watch: {
@@ -49,7 +54,7 @@ export default {
         },
 
         side() {
-            this.styleObject.backgroundPosition = '-' + 100 * (this.side - 1) + 'px 0';
+            this.styleObject.backgroundPosition = '-' + this.size * (this.side - 1) + 'px 0';
         }
     }
 }

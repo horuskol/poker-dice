@@ -17,7 +17,8 @@ export default {
                 height: this.size + 'px',
                 width: this.size + 'px',
                 backgroundImage: 'url("/images/dice-' + this.size + '.png")',
-                backgroundPosition: '0 0'
+                backgroundPosition: '0 0',
+                transition: 'background-position 100ms ease'
             },
             side: 1,
             timer: null,

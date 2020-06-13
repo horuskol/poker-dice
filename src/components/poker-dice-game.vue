@@ -5,7 +5,7 @@
         </div>
 
         <p class="ml-5 mr-5">
-            Click or tap on the dice to roll.
+            Press the enter key, or click/tap on the dice to roll.
         </p>
 
         <table class="m-5 border">
@@ -90,6 +90,16 @@ export default {
             rolls: [],
             dieSize: screen.width > 600 ? 100 : 50
         }
+    },
+
+    mounted() {
+        window.addEventListener("keypress", (event) => {
+            if (event.key.toLowerCase() === 'enter') {
+                console.log(this.rollDice(
+
+                ));
+            }
+        });
     },
 
     methods: {

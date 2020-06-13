@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {WAITING, ROLLING} from './poker-dice-game';
+import {ROLLING} from './poker-dice-game';
 
 export default {
     props: {

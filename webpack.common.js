@@ -1,11 +1,12 @@
 const path = require('path');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     entry: {
-        app: './src/index.js'
+        app: ['./src/index.js', './src/app.css']
     },
     output: {
         path: path.resolve(__dirname) + '/public',
@@ -29,20 +30,24 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'vue-style-loader',
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'postcss-loader'
+                    'postcss-loader',
                 ]
             }
         ]
     },
     plugins: [
-        new VueLoaderPlugin(),
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'src/index.html' },
                 { from: 'src/images', to: 'images' }
             ]
-        })
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'app.css',
+        }),
+        new VueLoaderPlugin()
     ],
     resolve: {
         extensions: ['.js', '.vue'],

@@ -9,65 +9,69 @@
         </p>
 
         <table class="m-5 border">
-            <tr>
-                <th class="text-left p-2 border-b-4">Dice</th>
-                <th v-for="(roll, index) in rolls" class="text-left p-2 border-b-4 border-l-2">Game {{ index + 1}}</th>
-            </tr>
+            <thead>
+              <tr>
+                  <th class="text-left p-2 border-b-4">&#8203;</th>
+                  <th v-for="(roll, index) in rolls" class="text-left p-2 border-b-4 border-l-2">Game {{ rolls.length - index }}</th>
+              </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">Aces</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['1'] * 1 }}</td>
-            </tr>
+              <tr>
+                  <td class="font-bold p-2 border-t-2 bg-gray-200">Total</td>
+                  <td v-for="roll in rolls" class="font-fancy font-bold text-xl text-center pt-2 border-l-2 border-t-2 bg-gray-200">{{ totalScore(roll) }}</td>
+              </tr>
+            </thead>
 
-            <tr>
-                <td class="h-16 p-2 border-b">Twos</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['2'] * 2 }}</td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td class="h-16 p-2 border-b">Aces</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['1'] * 1 }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">Threes</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['3'] * 3 }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">Twos</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['2'] * 2 }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">Fours</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['4'] * 4 }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">Threes</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['3'] * 3 }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">Fives</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['5'] * 5 }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">Fours</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['4'] * 4 }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">Sixes</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['6'] * 6 }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">Fives</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['5'] * 5 }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">3 of a kind</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ threeKind(roll) }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">Sixes</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ roll['6'] * 6 }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">4 of a kind</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fourKind(roll) }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">3 of a kind</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ threeKind(roll) }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">Full House</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fullHouse(roll) }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">4 of a kind</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fourKind(roll) }}</td>
+                </tr>
 
-            <tr>
-                <td class="h-16 p-2 border-b">5 of a kind</td>
-                <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fiveKind(roll) }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">Full House</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fullHouse(roll) }}</td>
+                </tr>
 
-            <tr>
-                <td class="font-bold p-2 border-t-2 bg-gray-200">Total</td>
-                <td v-for="roll in rolls" class="font-fancy font-bold text-xl text-center pt-2 border-l-2 border-t-2 bg-gray-200">{{ totalScore(roll) }}</td>
-            </tr>
+                <tr>
+                    <td class="h-16 p-2 border-b">5 of a kind</td>
+                    <td v-for="roll in rolls" class="font-fancy text-xl text-center pt-2 border-l-2 border-b">{{ fiveKind(roll) }}</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </template>
@@ -95,9 +99,7 @@ export default {
     mounted() {
         window.addEventListener("keypress", (event) => {
             if (event.key.toLowerCase() === 'enter') {
-                console.log(this.rollDice(
-
-                ));
+                this.rollDice();
             }
         });
     },
@@ -110,8 +112,6 @@ export default {
 
         stopped(score) {
             this.scores.push(score);
-
-            console.log(score);
 
             if (this.scores.length === 5) {
                 this.state = WAITING;
@@ -129,7 +129,7 @@ export default {
                     game[this.scores[i]]++;
                 }
 
-                this.rolls.push(game);
+                this.rolls.unshift(game);
             }
         },
 
